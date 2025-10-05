@@ -1,6 +1,5 @@
 import { FirestoreService } from "@/firebase/firestoreService";
 import { QuoteRequest } from "@/types/types";
-import Link from "next/link";
 
 function getQuotes() {
   return FirestoreService.getAllDocs<QuoteRequest>("Quotes");

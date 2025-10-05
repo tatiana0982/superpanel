@@ -1,6 +1,5 @@
 import { FirestoreService } from "@/firebase/firestoreService";
-import { ContactRequest, RepositoryDoc } from "@/types/types";
-import Link from "next/link";
+import { ContactRequest } from "@/types/types";
 
 function getContacts() {
   return FirestoreService.getAllDocs<ContactRequest>("Contacts");
