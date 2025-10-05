@@ -1,14 +1,19 @@
 import FileExplorer from "@/components/FileExplorer";
+import { dump } from "@/helper/helper";
 import { FileTree, NestedFileNode } from "@/types/types";
+import { headers } from "next/headers";
 
 type RepoParams = {
   params: Promise<{ repoName: string }>;
 };
 
-
 async function fetchFileTree(repoName: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-  const url = `${baseUrl}/api/repo-file-tree?repoName=${repoName}`;
+  const headersList = await headers(); 
+  const host = headersList.get("host");
+  const proto = headersList.get("x-forwarded-proto") || "http"; // add fallback
+  const url = `${proto}://${host}/api/repo-file-tree?repoName=${encodeURIComponent(
+    repoName
+  )}`;
 
   const res = await fetch(url);
   return res.json();
@@ -47,15 +52,20 @@ function generateNestedFileTree(fileTree: FileTree[]): NestedFileNode[] {
 export default async function RepoPage({ params }: RepoParams) {
   const { repoName } = await params;
 
-  const decodedRepoName = decodeURIComponent(repoName)
+  const decodedRepoName = decodeURIComponent(repoName);
 
-  const { fileTree } : { fileTree : FileTree[]} = await fetchFileTree(decodedRepoName);
+  const { fileTree }: { fileTree: FileTree[] } = await fetchFileTree(
+    decodedRepoName
+  );
 
-const nestedTree = generateNestedFileTree(fileTree);
+  const nestedTree = generateNestedFileTree(fileTree);
 
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4 text-purple-400"> Repository {decodedRepoName} </h1>
+      <h1 className="text-2xl font-bold mb-4 text-purple-400">
+        {" "}
+        Repository {decodedRepoName}{" "}
+      </h1>
       <FileExplorer tree={nestedTree} repoName={decodedRepoName} />
     </div>
   );
