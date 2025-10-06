@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 
 // --- Example Sidebar ---
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="flex justify-center min-h-screen w-full bg-slate-900">
-          <Sidebar />
-          {/* Sidebar */}
+        <main className=" min-h-screen min-w-screen bg-slate-900">
+          <div className="flex w-full max-w-[1400px] mx-auto">
+            <Sidebar />
+            {/* Sidebar */}
 
-          {children}
+            <div className="mt-12 overflow-x-hidden">{children}</div>
+          </div>
         </main>
       </body>
     </html>
