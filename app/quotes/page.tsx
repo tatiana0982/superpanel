@@ -1,6 +1,8 @@
 import { FirestoreService } from "@/firebase/firestoreService";
 import { QuoteRequest } from "@/types/types";
 
+export const dynamic = "force-dynamic";
+
 function getQuotes() {
   return FirestoreService.getAllDocs<QuoteRequest>("Quotes");
 }

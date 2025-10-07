@@ -2,9 +2,14 @@ import { FirestoreService } from "@/firebase/firestoreService";
 import { RepositoryDoc } from "@/types/types";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
+
 function getRepositories() {
   return FirestoreService.getAllDocs<RepositoryDoc>("Repositories");
 }
+
+
 
 export default async function RepoTable() {
   const repos = await getRepositories();

@@ -1,6 +1,9 @@
 import { FirestoreService } from "@/firebase/firestoreService";
 import { ContactRequest } from "@/types/types";
 
+export const dynamic = "force-dynamic";
+
+
 function getContacts() {
   return FirestoreService.getAllDocs<ContactRequest>("Contacts");
 }
