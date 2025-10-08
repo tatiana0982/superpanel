@@ -35,13 +35,16 @@ export default async function RepoTable() {
                 Employees
               </th>
               <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3">
+                Phone
+              </th>
+              <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3">
                 Message
               </th>
               <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3">
                 Services
               </th>
               <th scope="col" className="px-4 py-2 sm:px-6 sm:py-3">
-                Requested
+                Requested At
               </th>
             </tr>
           </thead>
@@ -63,6 +66,9 @@ export default async function RepoTable() {
                 </td>
                 <td className="px-4 py-3 sm:px-6 font-medium text-white">
                   {quote.employees}
+                </td>
+                <td className="px-4 py-3 sm:px-6 font-medium text-white">
+                  {quote.phone}
                 </td>
                 <td className="px-4 py-3 sm:px-6 font-medium text-white">
                   {quote.message}
