@@ -3,22 +3,20 @@
  * @param  {...unknown} args - Values to dump
  */
 export function dump(...args: unknown[]): void {
-  const timestamp = new Date().toISOString();
 
-  console.log("══════════ DUMP START ══════════");
-  console.log(`Timestamp: ${timestamp}`);
+  console.log('\x1b[34m%s\x1b[0m',"══════════ DUMP START ══════════");
   
   args.forEach((arg, index) => {
     const type = Array.isArray(arg) ? "array" : typeof arg;
     console.log(`\n[${index + 1}] Type: ${type}`);
     try {
-      console.log(JSON.stringify(arg, null, 2));
+      console.log('\x1b[33m%s\x1b[0m',JSON.stringify(arg, null, 2));
     } catch {
       console.log(arg); // Fallback for circular structures
     }
   });
 
-  console.log("══════════ DUMP END ════════════");
+  console.log('\x1b[34m%s\x1b[0m',"══════════ DUMP END ════════════");
 }
 
 
