@@ -2,7 +2,7 @@ import { auth, googleProvider } from "@/firebase/firebase-client";
 import { dump } from "@/helper/helper";
 import { signInWithPopup, signOut } from "firebase/auth";
 
-  const googleLogin = async () => {
+  const signInWithGoogle = async () => {
     const result = await signInWithPopup(auth, googleProvider);
 
     // Check if user exists in Firestore
@@ -26,4 +26,4 @@ import { signInWithPopup, signOut } from "firebase/auth";
   };
 
 
-  export { googleLogin , logout }
+  export { signInWithGoogle , logout }
