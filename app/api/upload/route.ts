@@ -14,12 +14,16 @@ export async function POST(req: NextRequest) {
     const description = formData.get("description") as string;
     const keywords = formData.get("keywords") as string;
 
+    const category = formData.get("category") as string;
+    const label = formData.get("label") as string;
 
 
 
-    if (!file || !name || !title || !description || !keywords ) {
+
+
+    if (!file || !name || !title || !description || !keywords || !label || !category) {
       return NextResponse.json(
-        { error: "Missing file or name or title or description or keywords" }, 
+        { error: "Missing file or name or title or description or keywords or category or label" }, 
         { status: 400 }
       );
     }
@@ -94,6 +98,8 @@ export async function POST(req: NextRequest) {
       description : description,
       keywords : keywords ,
       fileTree : fileTree,
+      category : category ,
+      label : label ,
       createdAt : Timestamp.now()
     });
 

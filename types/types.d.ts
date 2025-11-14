@@ -8,13 +8,15 @@ export type FileTree = {
 
 
 export type RepositoryDoc = {
-  docId : string ;
+  docId: string;
   repoName: string;
   title: string;
   description: string;
   keywords: string;
+  category: string;
+  label: string;
   fileTree: FileTree[];
-  createdAt: Timestamp ;
+  createdAt: Timestamp;
 }
 
 export type QuoteRequest = {
@@ -25,7 +27,7 @@ export type QuoteRequest = {
   employees: string;
   message: string;
   services: string[];
-  createdAt: Timestamp ;
+  createdAt: Timestamp;
 };
 
 export type ContactRequest = {
@@ -34,7 +36,7 @@ export type ContactRequest = {
   email: string;
   company: string;
   message: string;
-  createdAt: Timestamp ;
+  createdAt: Timestamp;
 
 };
 
@@ -43,3 +45,14 @@ export type ContactRequest = {
 export type NestedFileNode =
   | { name: string; type: "folder"; children: NestedFileNode[] }
   | { name: string; type: "file"; path: string; url: string };
+
+
+export type CategoryDoc = {
+  name: string;
+  createdAt: Timestamp;
+}
+
+export type LabelDoc = {
+  name: string;
+  createdAt: Timestamp;
+}

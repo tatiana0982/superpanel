@@ -1,29 +1,27 @@
 import { FirestoreService } from "@/firebase/firestoreService";
-import { RepositoryDoc } from "@/types/types";
+import { LabelDoc } from "@/types/types";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
 
-function getRepositories() {
-  return FirestoreService.getAllDocs<RepositoryDoc>("Repositories");
+function getLabels() {
+  return FirestoreService.getAllDocs<LabelDoc>("Labels");
 }
 
-
-
 export default async function RepoTable() {
-  const repos = await getRepositories();
+  const labels = await getLabels();
 
   return (
     <div className="overflow-x-auto bg-slate-800 border border-slate-700 rounded-lg shadow-lg mt-4 min-w-[70vw]">
       {/* Header with Add Button */}
       <div className="flex justify-between items-center px-6 py-3 border-b border-slate-700">
-        <h2 className="text-lg font-semibold text-white">Repositories</h2>
-        <Link
-          href="/add-repo"
+        <h2 className="text-lg font-semibold text-white">Labels </h2>
+         <Link
+          href="/labels/create"
           className="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 rounded-md text-white transition-colors"
         >
-          + Add Repo
+          + Add Label
         </Link>
       </div>
 
@@ -34,42 +32,24 @@ export default async function RepoTable() {
             <th scope="col" className="px-6 py-3">
               Name
             </th>
+           
             <th scope="col" className="px-6 py-3">
-              Category
-            </th> <th scope="col" className="px-6 py-3">
-              Label
+              Created At
             </th>
-            <th scope="col" className="px-6 py-3">
-              Files
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Created
-            </th>
-            {/* <th scope="col" className="px-6 py-3">Actions</th> */}
           </tr>
         </thead>
         <tbody>
-          {repos.map((repo) => (
+          {labels.map((contact) => (
             <tr
-              key={repo.id}
+              key={contact.id}
               className="border-t border-slate-700 hover:bg-slate-700/50 transition-colors"
             >
               <td className="px-6 py-4 font-medium text-white">
-                {repo.repoName}
+                {contact.name}
               </td>
-
-              <td className="px-6 py-4 font-medium text-white">
-                {repo.category}
-              </td>
-
-              <td className="px-6 py-4 font-medium text-white">
-                {repo.label}
-              </td>
+               
               <td className="px-6 py-4">
-                <Link href={`/repos/${repo.repoName}`} className="bg-green-400 text-black" > View Files </Link>
-              </td>
-              <td className="px-6 py-4">
-                {repo.createdAt.toDate().toLocaleString()}
+                {contact.createdAt.toDate().toLocaleString()}
               </td>
             </tr>
           ))}
